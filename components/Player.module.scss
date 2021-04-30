@@ -1,0 +1,114 @@
+@import "../styles/theme.scss";
+
+.Player {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    .lineTop {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $blue-color;
+        background: linear-gradient(90deg, rgba(0, 57, 99, 1) 0%, rgba(0, 97, 170, 1) 100%);
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: $container-width;
+            height: 10vh;
+            img {
+                width: 65%;
+                @include media($tablet) {
+                    width: 22%;
+                }
+                @include media($desktop) {
+                    width: 16%;
+                }
+            }
+            p {
+                display: none;
+                font-size: 1.1rem;
+                align-self: flex-end;
+                padding-bottom: 1.3rem;
+                color: $main-color;
+                letter-spacing: 0.3rem;
+                font-weight: 300;
+                @include media($tablet) {
+                    display: block;
+                }
+                @include media($desktop) {
+                    letter-spacing: 0.7rem;
+                }
+            }
+            .hamburger {
+                width: 2rem;
+                display: block;
+                @include media($tablet) {
+                    width: 0%;
+                    display: none;
+                }
+            }
+        }
+    }
+    .lineBottom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // border: 1px dashed lightgray;
+        background-color: white;
+        // box-shadow: 0px 5px 5px 0px rgba(5, 5, 5, 0.2);
+        filter: drop-shadow(0 4px 5px rgba(5, 5, 5, 0.2));
+        nav {
+            width: 100%;
+            max-width: $container-width;
+            height: 10vh;
+            display: none;
+            justify-content: center;
+            @include media($tablet) {
+                display: flex;
+                justify-content: center;
+            }
+            @include media($desktop) {
+                justify-content: space-between;
+            }
+            ul {
+                list-style: none;
+                display: none;
+                justify-content: center;
+                width: 100%;
+                @include media($tablet) {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 90%;
+                }
+                @include media($desktop) {
+                    width: 40%;
+                }
+                li {
+                    font-weight: 700;
+                    font-size: 18px;
+                    display: flex;
+                    a {
+                        display: flex;
+                        padding: 0 0.5rem;
+                        align-items: center;
+                        color: black;
+                        transition: 0.2s all;
+                        @include media($tablet) {
+                            padding: 0 2vw;
+                        }
+                        // background-color: lightblue;
+                        &:hover {
+                            color: $hover-link;
+                            transform: translate(5px) scale(1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

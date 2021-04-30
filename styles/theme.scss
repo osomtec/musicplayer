@@ -1,0 +1,17 @@
+$mobile:                0px;        // min mobile
+$tablet:                600px;      // min tablet
+$desktop:               1200px;     // min desktop
+$big-desktop:           1800px;     // min desktop
+
+$container-width:       1380px;     // container max width
+$container-width:       85%;        // container max width
+
+$main-color:            #00FFFF;
+$blue-color:            #004D87;
+$hover-link:            #D61C16;
+
+@mixin media($device) {
+    @media screen and (min-width: $device) {
+        @content;
+    }
+}
