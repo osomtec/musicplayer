@@ -6,6 +6,8 @@ import Player from '../components/Player'
 import Search from '../components/Search'
 import styles from '../styles/Home.module.scss'
 
+const imgLogo = './images/foxbel-music3x.png';
+
 export default function Home() {
     return (
         <div>
@@ -17,36 +19,19 @@ export default function Home() {
 
             <div className={styles.container}>
                 <sidebar className={styles.sidebar}>
-                    <div className={styles.logo}>
-                        <Logo />
-                    </div>
-                    <div className={styles.library}>
-                        <Library />
-                    </div>
-                    <div className={styles.playlist}>
-                        <Playlist />
-                    </div>
-
+                    <Logo />
+                    <Library />
+                    <Playlist />
                 </sidebar>
 
                 <main className={styles.main}>
                     <div className={styles.topbar}>
-                        <div className={styles.searchbox}>
-                            <Search />
-                        </div>
-                        <div className={styles.loginbox}>
-                            <Loggin />
-                        </div>
+                        <Search />
+                        <Loggin />
                     </div>
-                    <div className={styles.coverbox}>
-                        <Cover />
-                    </div>
-                    <div className={styles.songsbox}>
-                        <Songs />
-                    </div>
-                    <div className={styles.albumsbox}>
-                        <Albums />
-                    </div>
+                    <Cover />
+                    <Songs />
+                    <Albums />
                 </main>
             </div>
 
@@ -59,24 +44,37 @@ export default function Home() {
 
 function Logo() {
     return (
-        <div>
-
+        <div className={styles.Logo}>
+            <img src={imgLogo} alt="logo" />
         </div>
     )
 }
 
 function Library() {
     return (
-        <div>
-
+        <div className={styles.Library}>
+            <h2>Mi Librería</h2>
+            <ul>
+                <li>Recientes</li>
+                <li>Artistas</li>
+                <li>Albumes</li>
+                <li>Canciones</li>
+                <li>Estaciones</li>
+            </ul>
         </div>
     )
 }
 
 function Playlist() {
     return (
-        <div>
-
+        <div className={styles.Playlist}>
+            <h2>Playlist</h2>
+            <ul>
+                <li>Metal</li>
+                <li>Para bailar</li>
+                <li>Rock 90s</li>
+                <li>Baladas</li>
+            </ul>
         </div>
     )
 }

@@ -7,6 +7,7 @@ $footer-height: 100px;
     max-width: $container-width;
     margin: 0 auto;
     display: grid;
+    grid-template-columns: repeat(4, 25%);
     grid-template-areas: "sidebar  main   main   main";
     // background-color: hotpink;
     @include media($tablet) {
@@ -19,17 +20,87 @@ $footer-height: 100px;
 
 .main {
     grid-area: main;
-    border: 1px dashed blue;
+    // border: 1px dashed blue;
+    background-color: white;
 }
 
 .sidebar {
     grid-area: sidebar;
-    border: 1px dashed yellow;
+    // border: 1px dashed yellow;
+    background-color: #662323;
 }
 
 .footer {
     margin: 0 auto;
     max-width: $container-width;
-    border: 1px dashed green;
+    // border: 1px dashed green;
     height: $footer-height;
+    background-color: $main-color;
 }
+
+.Logo {
+    padding: 3rem 2.5rem 1.5rem 2.5rem;
+    img {
+        width: 100%;
+    }
+}
+
+.topbar {
+    width: 100%;
+    padding: 2.5rem;
+    // background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+        width: 100%;
+        // border: 1px dashed black;
+        &:first-child {
+            width: 60%;
+        }
+        &:last-child {
+            width: 40%;
+        }
+    }
+    
+
+}
+
+.Playlist, .Library {
+    h2 {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0.05rem 2.5rem;
+    }
+    color: white;
+    font-weight: 300;
+    ul {
+        padding: 0.5rem 2.5rem 1.2rem 2.5rem;
+        list-style-type: none;
+        li {
+            position: relative;
+            font-size: 15px;
+            padding: 0.2rem 0;
+            &::before {
+                content: "";
+                display: block;
+                width: 0.35em;
+                height: 80%;
+                background-color: none;
+                position: absolute;
+                top: 10%;
+                left: -2.5rem;
+            }
+            &:hover {
+                color: $main-color;
+                font-weight: 500;
+                cursor: pointer;
+                &::before {
+                    background-color: $main-color;
+                }    
+            }
+        }
+    }
+}
+

@@ -1,0 +1,25 @@
+@import "../styles/theme.scss";
+
+.Search {
+
+    input[type="text"] {
+        width: 100%;
+        padding: 0.3em 1.5em;
+        border: 1px solid #828282;
+        border-radius: 1000px;
+        outline: 0;
+        position: relative;
+        display: block;
+        &::after {
+            content: "fdfdf";
+            display: block;
+            position: absolute;
+            width: 2em;
+            height: 2em;
+            background-color: blue;
+            top: -10px;
+            left: -10px;
+        }
+    }
+    
+}
