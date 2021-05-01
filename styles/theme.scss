@@ -3,12 +3,14 @@ $tablet:                600px;      // min tablet
 $desktop:               1200px;     // min desktop
 $big-desktop:           1800px;     // min desktop
 
-$container-width:       85%;        // container max width
-$container-width:       1300px;     // container max width
+$container-width:       10%;        // container max width
+$container-width:       1920px;     // container max width
 
 $main-color:            #E86060;
 $blue-color:            #004D87;
 $hover-link:            #D61C16;
+
+$footer-height: 100px;
 
 @mixin media($device) {
     @media screen and (min-width: $device) {

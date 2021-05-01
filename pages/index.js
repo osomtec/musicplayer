@@ -6,7 +6,7 @@ import Search from '../components/Search'
 import styles from '../styles/Home.module.scss'
 import CardSong from '../components/CardSong'
 import { SmoothScrollProvider } from '../contexts/SmoothScroll.context'
-import { SmoothScrollContext} from '../contexts/SmoothScroll.context'
+import { SmoothScrollContext } from '../contexts/SmoothScroll.context'
 import { useContext } from 'react'
 import { songsData } from '../songsData'
 
@@ -23,14 +23,14 @@ export default function IndexPage() {
 function Home() {
     const { scroll } = useContext(SmoothScrollContext)
     return (
-        <div data-scroll-section>
+        <div>
             <Head>
                 <title>Foxbel Music</title>
                 <meta name="description" content="Foxbel Music using Deezer API Rest" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles.container}>
+            <div data-scroll-section className={styles.container}>
                 <sidebar className={styles.sidebar}>
                     <Logo />
                     <Library />

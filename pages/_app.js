@@ -1,9 +1,8 @@
 import '../styles/globals.scss'
 
 function MyApp({ Component, pageProps }) {
-    // return <Component {...pageProps} />
     return (
-        <div data-scroll-container className="container">
+        <div data-scroll-container>
             <Component {...pageProps} />
         </div>
     )

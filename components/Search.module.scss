@@ -2,7 +2,6 @@
 
 .Search {
     width: 100%;
-    // padding: 0.3em 1.5em;
     form {
         display: flex;
     }
@@ -28,11 +27,9 @@
     button {
         background-color: transparent;
         position: relative;
-        // top: 0;
         left: -3.5em;
         outline: 0;
         padding: 0.5em;
-        // background-color: lightcyan;
         border: none;
         color: lightgrey;
         font-size: 0.7em;

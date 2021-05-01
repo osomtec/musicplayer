@@ -1,4 +1,4 @@
-import { faCoffee, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Search.module.scss';
 
@@ -8,7 +8,6 @@ function Search() {
             <form>
                 <input type="text" id="fsearch" name="nsearch" placeholder="Buscar" />
                 <button><FontAwesomeIcon icon={faSearch} /></button>
-                {/* <label for="nsearch">Last Name</label> */}
             </form>
         </div>
     )
