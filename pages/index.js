@@ -5,6 +5,8 @@ import Loggin from '../components/Loggin'
 import Player from '../components/Player'
 import Search from '../components/Search'
 import styles from '../styles/Home.module.scss'
+import CardSong from '../components/CardSong'
+import { songsData } from '../songsData'
 
 const imgLogo = './images/foxbel-music3x.png';
 
@@ -30,6 +32,7 @@ export default function Home() {
                         <Loggin />
                     </div>
                     <Cover />
+                    <Results />
                     <Songs />
                     <Albums />
                 </main>
@@ -81,16 +84,28 @@ function Playlist() {
 
 function Songs() {
     return (
-        <div>
-
+        <div className={styles.Songs}>
+            {
+                songsData.map(song => (
+                    <CardSong key={song.id} song={song} />
+                ))
+            }
         </div>
     )
 }
 
 function Albums() {
     return (
-        <div>
+        <div className={styles.Albums}>
 
+        </div>
+    )
+}
+
+function Results() {
+    return (
+        <div className={styles.Results}>
+            <h2>Resultados</h2>
         </div>
     )
 }

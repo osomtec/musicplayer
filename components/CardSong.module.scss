@@ -1,2 +1,40 @@
 @import "../styles/theme.scss";
 
+.CardSong {
+    position: relative;
+    width: 100%;
+    // height: 25vw;
+    // border: 1px dashed gray;
+    // padding: 0.5rem;
+    .imagen {
+        position: relative;
+        width: 100%;
+        img {
+            width: 100%;
+            background-color: yellow;
+        }
+    }
+    .blendMask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.05);
+        mix-blend-mode: multiply;
+    }
+    .curtain {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate( -50%, -50%);
+        width: 80%;
+        height: 80%;
+        background: rgba($color: #000000, $alpha: 0.4);
+        mix-blend-mode: multiply;
+        transition: all 0.2s;
+        opacity: 0;
+    }
+    
+}
+
