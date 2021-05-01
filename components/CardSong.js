@@ -11,6 +11,11 @@ function CardSong(props) {
                 </div>
             </div>
             <div className={styles.blendMask}></div>
+            <div className={styles.dots}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <div className={styles.content}>
                 <h2>{props.song.title}</h2>
                 <h3>Album de la cancion</h3>
