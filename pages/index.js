@@ -1,18 +1,29 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Cover from '../components/Cover'
 import Loggin from '../components/Loggin'
 import Player from '../components/Player'
 import Search from '../components/Search'
 import styles from '../styles/Home.module.scss'
 import CardSong from '../components/CardSong'
+import { SmoothScrollProvider } from '../contexts/SmoothScroll.context'
+import { SmoothScrollContext} from '../contexts/SmoothScroll.context'
+import { useContext } from 'react'
 import { songsData } from '../songsData'
 
 const imgLogo = './images/foxbel-music3x.png';
 
-export default function Home() {
+export default function IndexPage() {
     return (
-        <div>
+        <SmoothScrollProvider options={{ smooth: true }}>
+            <Home />
+        </SmoothScrollProvider>
+    )
+}
+
+function Home() {
+    const { scroll } = useContext(SmoothScrollContext)
+    return (
+        <div data-scroll-section>
             <Head>
                 <title>Foxbel Music</title>
                 <meta name="description" content="Foxbel Music using Deezer API Rest" />
