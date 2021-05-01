@@ -3,15 +3,36 @@
 .CardSong {
     position: relative;
     width: 100%;
+    cursor: pointer;
     // height: 25vw;
     // border: 1px dashed gray;
-    // padding: 0.5rem;
+    padding: 0 0 0.5rem 0;
     .imagen {
         position: relative;
         width: 100%;
+        overflow: hidden;
         img {
             width: 100%;
-            background-color: yellow;
+            display: flex;
+            transition: 0.3s all;
+            // background-color: yellow;
+        }
+        .curtain {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+            background: rgba($color: #000000, $alpha: 0.2);
+            background-blend-mode: multiply;
+            // mix-blend-mode: multiply;
+            transition: all 0.3s;
+            // transition-delay: 0.1s;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
     .blendMask {
@@ -23,18 +44,35 @@
         background-color: rgba($color: #000000, $alpha: 0.05);
         mix-blend-mode: multiply;
     }
-    .curtain {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate( -50%, -50%);
-        width: 80%;
-        height: 80%;
-        background: rgba($color: #000000, $alpha: 0.4);
-        mix-blend-mode: multiply;
-        transition: all 0.2s;
-        opacity: 0;
+    .content {
+        h2 {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555555;
+        }
+        h3 {
+            font-weight: 300;
+            font-size: 0.7rem;
+            color: #828282;
+        }
     }
-    
-}
 
+    &:hover {
+        .curtain {
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            background-color: rgba($color: #000000, $alpha: 0.3);
+            & > div {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .imagen {
+            img {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
