@@ -1,5 +1,13 @@
 @import "../styles/theme.scss";
 
 .Loggin {
-
+    p {
+        text-align: right;
+        font-size: 16px;
+        .icon {
+            color: $main-color;
+            width: 0.9em;
+            margin-right: 0.5em;
+        }
+    }
 }

@@ -1,5 +1,124 @@
 @import "../styles/theme.scss";
 
 .Cover {
+    margin: 0 auto;
+    width: calc(100% - 5em);
+    background-color: #c28888;
+    background-blend-mode: luminosity;
+    display: flex;
 
+    .algumCover {
+        width: 28%;
+        height: 100%;
+        position: relative;
+        // background-color: turquoise;
+        img {
+            background-color: blueviolet;
+            width: 100%;
+            object-fit: cover;
+            display: flex;
+        }
+        .playMask {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s all;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.3);
+                & > div {
+                    transform: scale(1.15);
+                    opacity: 0.9;
+                }
+            }
+        }
+    }
+
+    .information {
+        position: relative;
+        width: 72%;
+        padding: 2rem 2rem 5rem 2rem;
+        color: white;
+        .title {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        .subtitle {
+            display: flex;
+            align-items: end;
+            gap: 2rem;
+            .tagline {
+                font-size: 0.85rem;
+                font-weight: 300;
+            }
+            .followers {
+                font-size: 0.7rem;
+                color: #662323;
+            }
+        }
+        .description {
+            p {
+                padding: 1rem 0;
+                font-weight: 300;
+                font-size: 0.75rem;
+            }
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            button {
+                color: white;
+                font-weight: 500;
+                font-size: 0.8rem;
+                padding: 0.4rem 1.5rem;
+                background-color: $main-color;
+                border-radius: 500px;
+                border: 0;
+                outline: none;
+                transition: 0.2s all;
+                border: 1.5px solid transparent;
+                cursor: pointer;
+                &:hover {
+                    background-color: transparent;
+                    font-weight: 500;
+                    color: $main-color;
+                    border: 1.5px solid $main-color;
+                }
+                &:nth-child(2) {
+                    background-color: transparent;
+                    border: 1.5px solid $main-color;
+                    color: $main-color;
+                    font-weight: 500;
+                    &:hover {
+                        background-color: $main-color;
+                        font-weight: 500;
+                        color: white;
+                    }
+                }
+                &:nth-child(3) {
+                    background-color: transparent;
+                    padding: 0;
+                    // border-radius: 0;
+                    // line-height: 0.5rem;
+                    color: white;
+                    height: 0.5rem;
+                    font-size: 20px;
+                    font-weight: 700;
+                    letter-spacing: 0.2rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
 }

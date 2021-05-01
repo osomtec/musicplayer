@@ -1,0 +1,15 @@
+
+@import "../../styles/theme.scss";
+
+.Playbutton {
+    width: 25%;
+    opacity: 0;
+    transition: 0.3s all;
+    .theIcon {
+        width: 100%;
+        height: 100%;
+        .iconFill {
+            fill: white;
+        }
+    }
+}
