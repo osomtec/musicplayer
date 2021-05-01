@@ -2,7 +2,6 @@ import styles from './Cover.module.scss';
 import Playbutton from './icons/Playbutton';
 
 const imgAlbumCover = './images/adele21cover.jpg';
-const imgPlay = './images/play.svg';
 const imgBackground = './images/background.jpg';
 
 function Cover() {
