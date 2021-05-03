@@ -103,9 +103,9 @@ function Player() {
                 typeof song !== 'undefined' ? (
                     <div className={styles.Player}>
                         <div className={styles.left}>
-                            {/* <div className={styles.poster}> */}
-                            {/* <img src={imgPoster} alt="poster" /> */}
-                            {/* </div> */}
+                            <div className={styles.poster}>
+                            <img src={imgPoster} alt="poster" />
+                            </div>
                             <div className={styles.info}>
                                 <p className={styles.title}>Cancion</p>
                                 <p className={styles.subtitle}>Artista - Album</p>
