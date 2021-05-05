@@ -13,16 +13,21 @@ const Search = ({ value, onChange }) => {
         debouncedChange(e.target.value);
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log('form processed')
+    }
+
     return (
         <div className={styles.Search}>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     type={'search'}
                     value={displayValue}
                     onChange={handleChange}
                     placeholder={'Buscar'}
                 />
-                <button><FontAwesomeIcon icon={faSearch} /></button>
+                <button type='submit'><FontAwesomeIcon icon={faSearch} /></button>
             </form>
         </div>
     );
