@@ -1,7 +1,6 @@
 @import "./theme.scss";
 
 .container {
-    min-height: calc(100vh - 100px);
     max-width: $container-width;
     margin: 0 auto;
     display: grid;
@@ -25,6 +24,7 @@
 }
 
 .main {
+    min-height: calc(100vh - 100px);
     grid-area: main;
     background-color: white;
 }
@@ -121,7 +121,7 @@
     }
 }
 
-.Songs {
+.Songs, .Albums {
     margin: 2rem auto;    
     width: calc(100% - 5rem);
     display: grid;

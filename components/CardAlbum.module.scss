@@ -1,2 +1,106 @@
 @import "../styles/theme.scss";
 
+.CardAlbum {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    padding: 0 0 0.5rem 0;
+    .imagen {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        img {
+            width: 100%;
+            display: flex;
+            transition: 0.3s all;
+        }
+        .curtain {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: rgba($color: #000000, $alpha: 0.2);
+            background-blend-mode: multiply;
+            transition: all 0.3s;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .blendMask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.05);
+        mix-blend-mode: multiply;
+    }
+    .dots {
+        position: absolute;
+        padding: 1rem;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        & > div {
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 1rem;
+            transition: 0.2s all;
+            &:nth-child(1) {
+                transform: translate(0, -3rem);
+                transition-delay: 0.2s;
+            }
+            &:nth-child(2) {
+                transform: translate(0, -3rem);
+                transition-delay: 0.1s;
+            }
+            &:nth-child(3) {
+                transform: translate(0, -3rem);
+                transition-delay: 0;
+            }
+        }
+    }
+    .content {
+        h2 {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555555;
+        }
+        h3 {
+            font-weight: 300;
+            font-size: 0.7rem;
+            color: #828282;
+        }
+    }
+
+    &:hover {
+        .curtain {
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            background-color: rgba($color: #000000, $alpha: 0.3);
+            & > div {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .imagen {
+            img {
+                transform: scale(1.1);
+            }
+        }
+        .dots {
+            & > div {
+                transform: translate(0, 0);
+            }
+        }
+    }
+}

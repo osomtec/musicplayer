@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import styles from './Search.module.scss';
 
 const Search = ({ value, onChange }) => {
-    
+
     const [displayValue, setDisplayValue] = useState(value);
     const debouncedChange = useDebounce(onChange, 500);
 
@@ -17,10 +17,10 @@ const Search = ({ value, onChange }) => {
         <div className={styles.Search}>
             <form>
                 <input
-                    type='search'
+                    type={'search'}
                     value={displayValue}
                     onChange={handleChange}
-                    placeholder='Buscar'
+                    placeholder={'Buscar'}
                 />
                 <button><FontAwesomeIcon icon={faSearch} /></button>
             </form>
@@ -29,7 +29,7 @@ const Search = ({ value, onChange }) => {
 }
 
 function useDebounce(fn, delay) {
-    
+
     const timeoutRef = useRef(null);
 
     function debouncedFn(...args) {
@@ -41,5 +41,21 @@ function useDebounce(fn, delay) {
 
     return debouncedFn;
 }
+
+// function useDebounced(value, timeout) {
+//     let [debouncedValue, setDebouncedValue] = useState(value)
+
+//     useEffect(() => {
+//         let timeoutId = setTimeout(() => {
+//             setDebouncedValue(value)
+//         }, delay)
+
+//         return () => {
+//             clearTimeout(timeoutId)
+//         }
+//     }, [value, timeout])
+
+//     return debouncedValue
+// }
 
 export default Search;

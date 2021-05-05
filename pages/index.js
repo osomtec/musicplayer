@@ -7,8 +7,8 @@ import styles from '../styles/Home.module.scss'
 import CardSong from '../components/CardSong'
 import { SmoothScrollProvider } from '../contexts/SmoothScroll.context'
 import { SmoothScrollContext } from '../contexts/SmoothScroll.context'
-import { useContext, useEffect } from 'react'
-import DataProvider, { DataContext } from '../contexts/APIContext'
+import { useContext, useEffect, useState } from 'react'
+import CardAlbum from '../components/CardAlbum'
 
 /**
  * https://api.deezer.com/search?q=artist:"aloe blacc"
@@ -23,18 +23,19 @@ const imgLogo = './images/foxbel-music3x.png';
 
 export default function IndexPage() {
     return (
-        <SmoothScrollProvider options={{ smooth: true }}>
-            <DataProvider>
-                <Home />
-            </DataProvider>
+        <SmoothScrollProvider options={{ smooth: false }}>
+            <Home />
         </SmoothScrollProvider>
     )
 }
 
 function Home() {
-    
+
+    const [songsData, setSongs] = useState({});
+    const [albumsData, setAlbums] = useState({});
+    const [text, setText] = useState('');
+
     const { scroll } = useContext(SmoothScrollContext)
-    const { songsData, text, setSongs, setAlbums } = useContext(DataContext)
 
     useEffect(() => {
         if (text) {
@@ -48,8 +49,8 @@ function Home() {
                     const songsData = await resSongs.json()
                     const resAlbums = await fetch(API_URL + `search?q=album:"${text}"`)
                     const albumsData = await resAlbums.json()
-                    console.log('Songs retrieved: ', songsData.data)
-                    console.log('Albums retrieved: ', albumsData.data)
+                    console.log('Songs retrieved: ', songsData.data.length, songsData.data)
+                    console.log('Albums retrieved: ', albumsData.data.length, albumsData.data)
                     setSongs(songsData)
                     setAlbums(albumsData)
                 } catch (error) {
@@ -78,16 +79,20 @@ function Home() {
 
                 <main className={styles.main}>
                     <div className={styles.topbar}>
-                        <Search />
+                        <Search
+                            value={text}
+                            onChange={(search) => setText(search)}
+                        />
                         <Loggin />
                     </div>
 
-                    {text && !songsData.data && <h2>Loading...</h2>}
+                    {text && !songsData.data && <Results tag={'Loading...'}/>}
 
                     <Cover />
-                    <Results />
-                    <Songs />
-                    {/* <Albums /> */}
+                    <Results tag={'Canciones'}/>
+                    <Songs songsData={songsData} />
+                    <Results tag={'Albumes'}/>
+                    <Albums albumsData={albumsData} />
                 </main>
             </div>
 
@@ -135,9 +140,7 @@ function Playlist() {
     )
 }
 
-function Songs() {
-
-    const { songsData } = useContext(DataContext)
+function Songs({ songsData }) {
 
     return (
         <div className={styles.Songs}>
@@ -152,9 +155,7 @@ function Songs() {
     )
 }
 
-function Albums() {
-
-    const { albumsData } = useContext(DataContext)
+function Albums({ albumsData }) {
 
     return (
         <div className={styles.Albums}>
@@ -169,10 +170,10 @@ function Albums() {
     )
 }
 
-function Results() {
+function Results({tag}) {
     return (
         <div className={styles.Results}>
-            <h2>Resultados</h2>
+            {tag.length && <h2>{tag}</h2>}
         </div>
     )
 }

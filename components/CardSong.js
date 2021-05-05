@@ -5,7 +5,7 @@ function CardSong(props) {
     return (
         <div className={styles.CardSong}>
             <div className={styles.imagen}>
-                <img src={props.song.album.conver_medium} alt={props.song.title} />
+                <img src={props.song.album.cover_medium} alt={props.song.title} />
                 <div className={styles.curtain}>
                     <Playbutton />
                 </div>

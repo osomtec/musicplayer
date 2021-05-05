@@ -83,18 +83,13 @@ function Player() {
 
         updateSong();
 
-        // song.addEventListener('ended', handleClickNext);
         setIsPlaying(false);
         setCurrentSong(0);
 
         addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3');
         addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3');
         addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3');
-        // addList('https://www.bensound.com/bensound-music/bensound-happiness.mp3');
-        
-        // return () => {
-        //     song.removeEventListener('ended', handleClickNext);
-        // }
+
     }, [playList])
 
 
