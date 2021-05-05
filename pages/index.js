@@ -7,21 +7,60 @@ import styles from '../styles/Home.module.scss'
 import CardSong from '../components/CardSong'
 import { SmoothScrollProvider } from '../contexts/SmoothScroll.context'
 import { SmoothScrollContext } from '../contexts/SmoothScroll.context'
-import { useContext } from 'react'
-import { songsData } from '../songsData'
+import { useContext, useEffect } from 'react'
+import DataProvider, { DataContext } from '../contexts/APIContext'
+
+/**
+ * https://api.deezer.com/search?q=artist:"aloe blacc"
+ * https://api.deezer.com/search?q=album:"good things"
+ * https://api.deezer.com/search?q=track:"i need a dollar"
+ * 
+ */
+
+const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.deezer.com/';
 
 const imgLogo = './images/foxbel-music3x.png';
 
 export default function IndexPage() {
     return (
         <SmoothScrollProvider options={{ smooth: true }}>
-            <Home />
+            <DataProvider>
+                <Home />
+            </DataProvider>
         </SmoothScrollProvider>
     )
 }
 
 function Home() {
+    
     const { scroll } = useContext(SmoothScrollContext)
+    const { songsData, text, setSongs, setAlbums } = useContext(DataContext)
+
+    useEffect(() => {
+        if (text) {
+
+            setSongs({});
+            setAlbums({});
+
+            const fetchData = async () => {
+                try {
+                    const resSongs = await fetch(API_URL + `search?q=track:"${text}"`)
+                    const songsData = await resSongs.json()
+                    const resAlbums = await fetch(API_URL + `search?q=album:"${text}"`)
+                    const albumsData = await resAlbums.json()
+                    console.log('Songs retrieved: ', songsData.data)
+                    console.log('Albums retrieved: ', albumsData.data)
+                    setSongs(songsData)
+                    setAlbums(albumsData)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            fetchData();
+        }
+
+    }, [text]);
+
     return (
         <div>
             <Head>
@@ -42,10 +81,13 @@ function Home() {
                         <Search />
                         <Loggin />
                     </div>
+
+                    {text && !songsData.data && <h2>Loading...</h2>}
+
                     <Cover />
                     <Results />
                     <Songs />
-                    <Albums />
+                    {/* <Albums /> */}
                 </main>
             </div>
 
@@ -94,21 +136,35 @@ function Playlist() {
 }
 
 function Songs() {
+
+    const { songsData } = useContext(DataContext)
+
     return (
         <div className={styles.Songs}>
             {
-                songsData.map(song => (
-                    <CardSong key={song.id} song={song} />
-                ))
+                songsData.data && (
+                    songsData.data.map(song => (
+                        <CardSong key={song.id} song={song} />
+                    ))
+                )
             }
         </div>
     )
 }
 
 function Albums() {
+
+    const { albumsData } = useContext(DataContext)
+
     return (
         <div className={styles.Albums}>
-
+            {
+                albumsData.data && (
+                    albumsData.data.map(album => (
+                        <CardAlbum key={album.id} album={album} />
+                    ))
+                )
+            }
         </div>
     )
 }
@@ -120,66 +176,3 @@ function Results() {
         </div>
     )
 }
-
-
-// ------------------------------------------------------------------------
-// ------------------------------------------------------------------------
-// ------------------------------------------------------------------------
-
-
-/**
- * https://www.youtube.com/watch?v=k0cZA0NYTyQ&list=PLv2oOZboUtKO4_YN4T2CP9-fUKM0yozKg&index=16
- * 
- */
-
-// import { useEffect, useState } from 'react';
-// import SearchInput from './SearchInput';
-
-// export default function App() {
-//     const [info, setInfo] = useState({});
-//     const [text, setText] = useState('');
-
-//     useEffect(() => {
-//         if (text) {
-
-//             setInfo({});
-
-//             const fetchData = async() => {
-//                 try {
-//                     const res = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/302127')
-//                     const data = await res.json()
-//                     console.log(data)
-//                     setInfo(data)
-//                 } catch (error) {
-//                     console.log(error)
-//                 }
-//             }
-//             fetchData();
-//         }
-
-//     }, [text]);
-
-//     return (
-//         <div className="App">
-//             <h1>Animes</h1>
-//             <SearchInput
-//                 value={text}
-//                 onChange={(search) => setText(search)}
-//             />
-//             {text && !info.data && <h2>Cargando...</h2>}
-//             {info.data && (
-//                 <ul className="animes-list">
-//                     {info.data.map((anime) => (
-//                         <li key={anime.id}>
-//                             <img
-//                                 src={anime.attributes.posterImage.small}
-//                                 alt={anime.attributes.canonicalTitle}
-//                             />
-//                             {anime.attributes.canonicalTitle}
-//                         </li>
-//                     ))}
-//                 </ul>
-//             )}
-//         </div>
-//     );
-// }

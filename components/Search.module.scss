@@ -4,40 +4,40 @@
     width: 100%;
     form {
         display: flex;
-    }
-    input[type="text"] {
-        width: 100%;
-        padding: 0.3em 2.8em 0.3em 1.5em;
-        border: 1px solid #828282;
-        border-radius: 1000px;
-        outline: 0;
-        position: relative;
-        display: block;
-        &::after {
-            content: "fdfdf";
+        input[type="search"] {
+            width: 100%;
+            padding: 0.3em 2.8em 0.3em 1.5em;
+            border: 1px solid #828282;
+            border-radius: 1000px;
+            outline: 0;
+            position: relative;
             display: block;
-            position: absolute;
-            width: 2em;
-            height: 2em;
-            background-color: blue;
-            top: -10px;
-            left: -10px; 
+            &::after {
+                content: "fdfdf";
+                display: block;
+                position: absolute;
+                width: 2em;
+                height: 2em;
+                background-color: blue;
+                top: -10px;
+                left: -10px; 
+            }
         }
-    }
-    button {
-        background-color: transparent;
-        position: relative;
-        left: -3.5em;
-        outline: 0;
-        padding: 0.5em;
-        border: none;
-        color: lightgrey;
-        font-size: 0.7em;
-        width: 3em;
-        transition: 0.2s all;
-        cursor: pointer;
-        &:hover {
-            color: gray;
+        button {
+            background-color: transparent;
+            position: relative;
+            left: -3.5em;
+            outline: 0;
+            padding: 0.5em;
+            border: none;
+            color: lightgrey;
+            font-size: 0.7em;
+            width: 3em;
+            transition: 0.2s all;
+            cursor: pointer;
+            &:hover {
+                color: gray;
+            }
         }
     }
 }
