@@ -120,3 +120,66 @@ function Results() {
         </div>
     )
 }
+
+
+// ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+
+
+/**
+ * https://www.youtube.com/watch?v=k0cZA0NYTyQ&list=PLv2oOZboUtKO4_YN4T2CP9-fUKM0yozKg&index=16
+ * 
+ */
+
+// import { useEffect, useState } from 'react';
+// import SearchInput from './SearchInput';
+
+// export default function App() {
+//     const [info, setInfo] = useState({});
+//     const [text, setText] = useState('');
+
+//     useEffect(() => {
+//         if (text) {
+
+//             setInfo({});
+
+//             const fetchData = async() => {
+//                 try {
+//                     const res = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/302127')
+//                     const data = await res.json()
+//                     console.log(data)
+//                     setInfo(data)
+//                 } catch (error) {
+//                     console.log(error)
+//                 }
+//             }
+//             fetchData();
+//         }
+
+//     }, [text]);
+
+//     return (
+//         <div className="App">
+//             <h1>Animes</h1>
+//             <SearchInput
+//                 value={text}
+//                 onChange={(search) => setText(search)}
+//             />
+//             {text && !info.data && <h2>Cargando...</h2>}
+//             {info.data && (
+//                 <ul className="animes-list">
+//                     {info.data.map((anime) => (
+//                         <li key={anime.id}>
+//                             <img
+//                                 src={anime.attributes.posterImage.small}
+//                                 alt={anime.attributes.canonicalTitle}
+//                             />
+//                             {anime.attributes.canonicalTitle}
+//                         </li>
+//                     ))}
+//                 </ul>
+//             )}
+//         </div>
+//     );
+// }
