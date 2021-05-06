@@ -17,8 +17,7 @@ import CardAlbum from '../components/CardAlbum'
  * 
  */
 
-// const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.deezer.com/';
-const API_URL = 'https://api.deezer.com/';
+const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.deezer.com/';
 
 const imgLogo = './images/foxbel-music3x.png';
 
