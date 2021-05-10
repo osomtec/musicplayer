@@ -1,10 +1,10 @@
 import styles from './CardSong.module.scss';
 import Playbutton from './icons/Playbutton';
 
-function CardSong({ song, setSongId }) {
+function CardSong({ song, setSongIndex }) {
 
     return (
-        <div className={styles.CardSong} onClick={() => setSongId(song.index)}>
+        <div className={styles.CardSong} onClick={() => setSongIndex(song.index)}>
             <div className={styles.imagen}>
                 <img src={song.cover} alt={song.title} />
                 <div className={styles.curtain}>

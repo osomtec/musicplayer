@@ -144,8 +144,6 @@ function Playlist() {
 
 function Songs({ songsData, setGPlaylist, setGCurrentSong, setGIsPlaying }) {
 
-    const [songIndex, setSongIndex] = useState(null)
-
     function filterSongs(rawSongs) {
         let newArray = []
         for (let i = 0; i < rawSongs.length; i++) {
@@ -163,22 +161,19 @@ function Songs({ songsData, setGPlaylist, setGCurrentSong, setGIsPlaying }) {
         return newArray;
     }
 
-    function handleClick() {
-        console.log('you clicked me again', songIndex)
-        setGCurrentSong(songIndex)
+    function handleClick(index) {
+        console.log('you clicked at Songs', index)
+        setGCurrentSong(index)
         setGIsPlaying(true)
         setGPlaylist(filterSongs(songsData))
     }
-
-    console.log('songsData in Songs component is: ')
-    console.log(songsData)
 
     return (
         <div className={styles.Songs}>
             {
                 songsData && (
                     filterSongs(songsData).map(song => (
-                        <CardSong key={song.id} song={song} setSongIndex={setSongIndex} />
+                        <CardSong key={song.id} song={song} setSongIndex={handleClick} />
                     ))
                 )
             }
