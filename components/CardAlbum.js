@@ -1,11 +1,12 @@
 import styles from './CardAlbum.module.scss';
 import Playbutton from './icons/Playbutton';
 
-function CardAlbum(props) {
+function CardAlbum({ album }) {
+
     return (
         <div className={styles.CardAlbum}>
             <div className={styles.imagen}>
-                <img src={props.album.album.cover_medium} alt={props.album.title} />
+                <img src={album.cover} alt={album.title} />
                 <div className={styles.curtain}>
                     <Playbutton />
                 </div>
@@ -17,8 +18,8 @@ function CardAlbum(props) {
                 <div></div>
             </div>
             <div className={styles.content}>
-                <h2>{props.album.title}</h2>
-                <h3>{props.album.artist.name}</h3>
+                <h2>{album.title}</h2>
+                <h3>{album.artist}</h3>
             </div>
         </div>
     )

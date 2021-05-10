@@ -1,11 +1,12 @@
 import styles from './CardSong.module.scss';
 import Playbutton from './icons/Playbutton';
 
-function CardSong(props) {
+function CardSong({ song, setSongId }) {
+
     return (
-        <div className={styles.CardSong}>
+        <div className={styles.CardSong} onClick={() => setSongId(song.index)}>
             <div className={styles.imagen}>
-                <img src={props.song.album.cover_medium} alt={props.song.title} />
+                <img src={song.cover} alt={song.title} />
                 <div className={styles.curtain}>
                     <Playbutton />
                 </div>
@@ -17,8 +18,8 @@ function CardSong(props) {
                 <div></div>
             </div>
             <div className={styles.content}>
-                <h2>{props.song.title}</h2>
-                <h3>{props.song.album.title}</h3>
+                <h2>{song.title}</h2>
+                <h3>{song.album}</h3>
             </div>
         </div>
     )

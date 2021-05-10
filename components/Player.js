@@ -5,11 +5,11 @@ import styles from './Player.module.scss';
 
 const imgPoster = './images/adele21cover.jpg';
 
-function Player() {
+function Player({ newPlayList = [], play = false, newCurrentSong = null }) {
     const [isMuted, setIsMuted] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [currentSong, setCurrentSong] = useState(0)   // the song is repeated on next and previous buttons
-    const [playList] = useState([]);
+    const [isPlaying, setIsPlaying] = useState(play);
+    const [currentSong, setCurrentSong] = useState(newCurrentSong)   // the song is repeated on next and previous buttons
+    const [playList] = useState(newPlayList);
     const [song, setSong] = useState(undefined)
 
     function handleClickMute() {
@@ -31,7 +31,7 @@ function Player() {
 
     function playSong() {
         if (currentSong >= 0) {
-            song.src = playList[currentSong];
+            song.src = playList[currentSong].preview;
             song.play();
             setIsPlaying(true);
         }
@@ -73,25 +73,33 @@ function Player() {
 
     useEffect(() => {
 
-        function addList(sourceUrl) {
-            playList.push(sourceUrl);
-        }
-
-        const updateSong = () => {
+        const createSong = () => {
             setSong(new Audio());
         }
 
-        updateSong();
+        createSong();
 
-        setIsPlaying(false);
-        setCurrentSong(0);
+        console.log('first time ?')
 
-        addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3');
-        addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3');
-        addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3');
+    }, [])
 
-    }, [playList])
+    // useEffect(() => {
 
+    //     function addList(sourceUrl) {
+    //         playList.push(sourceUrl);
+    //     }
+
+    //     addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3');
+    //     addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3');
+    //     addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3');
+
+    //     setCurrentSong(0);
+
+    //     setIsPlaying(false);
+
+    //     console.log('updated ?')
+
+    // }, [playList])
 
     return (
         <>
@@ -100,7 +108,7 @@ function Player() {
                     <div className={styles.Player}>
                         <div className={styles.left}>
                             <div className={styles.poster}>
-                            <img src={imgPoster} alt="poster" />
+                                <img src={imgPoster} alt="poster" />
                             </div>
                             <div className={styles.info}>
                                 <p className={styles.title}>Cancion</p>

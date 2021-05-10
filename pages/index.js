@@ -3,12 +3,12 @@ import Cover from '../components/Cover'
 import Loggin from '../components/Loggin'
 import Player from '../components/Player'
 import Search from '../components/Search'
-import styles from '../styles/Home.module.scss'
 import CardSong from '../components/CardSong'
+import CardAlbum from '../components/CardAlbum'
 import { SmoothScrollProvider } from '../contexts/SmoothScroll.context'
 import { SmoothScrollContext } from '../contexts/SmoothScroll.context'
 import { useContext, useEffect, useState } from 'react'
-import CardAlbum from '../components/CardAlbum'
+import styles from '../styles/Home.module.scss'
 
 /**
  * https://api.deezer.com/search?q=artist:"aloe blacc"
@@ -31,30 +31,29 @@ export default function IndexPage() {
 
 function Home() {
 
-    const [songsData, setSongs] = useState({});
-    const [albumsData, setAlbums] = useState({});
+    const { scroll } = useContext(SmoothScrollContext)
+
+    const [songsData, setSongs] = useState([]);
+    const [albumsData, setAlbums] = useState([]);
     const [text, setText] = useState('');
 
-    const { scroll } = useContext(SmoothScrollContext)
+    const [gPlayList, setGPlayList] = useState([]);
+    const [gCurrentSong, setGCurrentSong] = useState(null)
+    const [gIsPlaying, setGIsPlaying] = useState(false)
 
     useEffect(() => {
         if (text) {
 
-            setSongs({});
-            setAlbums({});
-
             const fetchData = async () => {
                 try {
                     const resSongs = await fetch(API_URL + `search?q=track:"${text}"`)
-                    const songsData = await resSongs.json()
+                    const songsDataRaw = await resSongs.json()
                     const resAlbums = await fetch(API_URL + `search?q=album:"${text}"`)
-                    const albumsData = await resAlbums.json()
-                    console.log('Songs retrieved: ', songsData.data.length, songsData.data)
-                    console.log('Albums retrieved: ', albumsData.data.length, albumsData.data)
-                    setSongs(songsData)
-                    setAlbums(albumsData)
+                    const albumsDataRaw = await resAlbums.json()
+                    setSongs(songsDataRaw.data)
+                    setAlbums(albumsDataRaw.data)
                 } catch (error) {
-                    console.log(error)
+                    console.log('Fetch Error:', error)
                 }
             }
             fetchData();
@@ -86,18 +85,19 @@ function Home() {
                         <Loggin />
                     </div>
 
-                    {text && !songsData.data && <Results tag={'Loading...'}/>}
-
+                    {text && songsData && <Results tag={'Loading...'} />}
                     <Cover />
-                    <Results tag={'Canciones'}/>
-                    <Songs songsData={songsData} />
-                    <Results tag={'Albumes'}/>
-                    <Albums albumsData={albumsData} />
+
+                    {text && songsData && <Results tag={'Canciones'} />}
+                    <Songs songsData={songsData} setGPlayList={setGPlayList} setGCurrentSong={setGCurrentSong} setGIsPlaying={setGIsPlaying} />
+
+                    {text && albumsData && <Results tag={'Albumes'} />}
+                    {/* <Albums albumsData={albumsData} /> */}
                 </main>
             </div>
 
             <footer className={styles.footer}>
-                <Player />
+                <Player newPlayList={gPlayList} play={gIsPlaying} newCurrentSong={gCurrentSong} />
             </footer>
         </div>
     )
@@ -140,14 +140,47 @@ function Playlist() {
     )
 }
 
-function Songs({ songsData }) {
+function Songs({ songsData, setGPlayList, setGCurrentSong, setGIsPlaying }) {
+
+    const [songIndex, setSongIndex] = useState(null)
+
+    function filterSongs(rawSongs) {
+        let newArray = []
+        for (let i = 0; i < rawSongs.length; i++) {
+            const newSong = {}
+            newSong.index = i
+            newSong.id = rawSongs[i].id
+            newSong.title = rawSongs[i].title
+            newSong.artist = rawSongs[i].artist.name
+            newSong.album = rawSongs[i].album.title
+            newSong.cover = rawSongs[i].album.cover_medium
+            newSong.bigCover = rawSongs[i].album.cover_big
+            newSong.preview = rawSongs[i].preview
+            newArray.push(newSong)
+        }
+        return newArray;
+    }
+
+    function handleClick() {
+        console.log('you clicked me again', songIndex)
+        setGCurrentSong(songIndex)
+        setGIsPlaying(true)
+        setGPlayList(filterSongs(songsData))
+    }
+
+    // useEffect(() => {
+    //     handleClick(songId)
+    // }, [songIndex])
+
+    console.log('songsData in Songs component is: ')
+    console.log(songsData)
 
     return (
         <div className={styles.Songs}>
             {
-                songsData.data && (
-                    songsData.data.map(song => (
-                        <CardSong key={song.id} song={song} />
+                songsData && (
+                    filterSongs(songsData).map(song => (
+                        <CardSong key={song.id} song={song} setSongIndex={setSongIndex} />
                     ))
                 )
             }
@@ -155,13 +188,43 @@ function Songs({ songsData }) {
     )
 }
 
-function Albums({ albumsData }) {
+function Albums({ albumsData, gPlayList, gCurrentSong, gIsPlaying }) {
+
+    const [albumId, setAlbumId] = useState(0);
+
+    function filterAlbums(rawAlbums) {
+        let newArray = []
+        for (let i = 0; i < rawAlbums.length; i++) {
+            const newAlbum = {}
+            newAlbum.index = i
+            newAlbum.id = rawAlbums[i].id
+            newAlbum.title = rawAlbums[i].title
+            newAlbum.artist = rawAlbums[i].artist.name
+            newAlbum.album = rawAlbums[i].album.title
+            newAlbum.cover = rawAlbums[i].album.cover_medium
+            newAlbum.bigCover = rawAlbums[i].album.cover_big
+            newAlbum.preview = rawAlbums[i].preview
+            newArray.push(newAlbum)
+        }
+        return newArray
+    }
+
+    function handleClick(id) {
+        console.log('you clicked me again', id)
+    }
+
+    useEffect(() => {
+        handleClick(albumId)
+    }, [albumId])
+
+    console.log('albumsData in Albums component is: ')
+    console.log(albumsData)
 
     return (
         <div className={styles.Albums}>
             {
-                albumsData.data && (
-                    albumsData.data.map(album => (
+                albumsData && (
+                    albumsData.map(album => (
                         <CardAlbum key={album.id} album={album} />
                     ))
                 )
@@ -170,10 +233,10 @@ function Albums({ albumsData }) {
     )
 }
 
-function Results({tag}) {
+function Results({ tag }) {
     return (
         <div className={styles.Results}>
-            {tag.length && <h2>{tag}</h2>}
+            <h2>{tag}</h2>
         </div>
     )
 }
