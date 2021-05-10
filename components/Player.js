@@ -1,80 +1,80 @@
-import { faPause, faPlay, faStepBackward, faStepForward, faVolumeMute, faVolumeOff, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import styles from './Player.module.scss';
+import { faPause, faPlay, faStepBackward, faStepForward, faVolumeMute, faVolumeOff, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react'
+import styles from './Player.module.scss'
 
-const imgPoster = './images/adele21cover.jpg';
+const imgPoster = './images/adele21cover.jpg'
 
 function Player({ newPlaylist = [], play = false, newCurrentSong = null }) {
-    const [isMuted, setIsMuted] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(play);
+    const [isMuted, setIsMuted] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(play)
     const [currentSong, setCurrentSong] = useState(newCurrentSong)   // the song is repeated on next and previous buttons
-    const [playlist] = useState(newPlaylist);
+    const [playlist] = useState(newPlaylist)
     const [song, setSong] = useState(undefined)
 
     function handleClickMute() {
-        setIsMuted(!isMuted.current);
+        setIsMuted(!isMuted.current)
         if (song.muted) {
-            song.muted = false;
-            setIsMuted(false);
+            song.muted = false
+            setIsMuted(false)
         }
         else {
-            song.muted = true;
-            setIsMuted(true);
+            song.muted = true
+            setIsMuted(true)
         }
     }
 
     function handleInputVolume(e) {
-        const value = e.target.value;
-        song.volume = value;
+        const value = e.target.value
+        song.volume = value
     }
 
     function playSong() {
         if (currentSong >= 0) {
-            song.src = playlist[currentSong].preview;
-            song.play();
-            setIsPlaying(true);
+            song.src = playlist[currentSong].preview
+            song.play()
+            setIsPlaying(true)
         }
-        console.log(`currentSong= ${currentSong}  :  Lenght = ${playlist.length}  :  isPlaying = ${isPlaying}`);
+        console.log(`currentSong= ${currentSong}  :  Lenght = ${playlist.length}  :  isPlaying = ${isPlaying}`)
     }
 
     function stopSong() {
-        song.pause();
-        song.currentTime = 0;
-        setIsPlaying(false);
+        song.pause()
+        song.currentTime = 0
+        setIsPlaying(false)
     }
 
     function handleClickPlay() {
         if (!isPlaying) {        // song.paused is not working (it always gives true)
-            playSong();
+            playSong()
         }
         else {
-            stopSong();
+            stopSong()
         }
     }
 
     function handleClickNext() {
-        stopSong();
-        let current = currentSong + 1;
+        stopSong()
+        let current = currentSong + 1
         if (current === playlist.length)
-            current = 0;
-        setCurrentSong(current);
-        playSong();
+            current = 0
+        setCurrentSong(current)
+        playSong()
     }
 
     function handleClickPrevious() {
         stopSong();
-        let current = currentSong - 1;
+        let current = currentSong - 1
         if (current < 0)
-            current = playlist.length - 1;
-        setCurrentSong(current);
-        playSong();
+            current = playlist.length - 1
+        setCurrentSong(current)
+        playSong()
     }
 
     useEffect(() => {
 
         const createSong = () => {
-            setSong(new Audio());
+            setSong(new Audio())
         }
 
         createSong();
@@ -83,13 +83,16 @@ function Player({ newPlaylist = [], play = false, newCurrentSong = null }) {
 
     }, [])
 
+    /**
+     * Dummy playlist
+     */
     useEffect(() => {
         function addList(sourceUrl) {
-            playlist.push(sourceUrl);
+            playlist.push({preview: sourceUrl})
         }
-        addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3');
-        addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3');
-        addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3');
+        addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3')
+        addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3')
+        addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3')
         setCurrentSong(0);
         setIsPlaying(false);
         console.log('updated ?')

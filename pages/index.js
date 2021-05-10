@@ -11,6 +11,8 @@ import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/Home.module.scss'
 
 /**
+ * Sample API callings:
+ * 
  * https://api.deezer.com/search?q=artist:"aloe blacc"
  * https://api.deezer.com/search?q=album:"good things"
  * https://api.deezer.com/search?q=track:"i need a dollar"
@@ -37,7 +39,7 @@ function Home() {
     const [albumsData, setAlbums] = useState([]);
     const [text, setText] = useState('');
 
-    const [gPlayList, setGPlayList] = useState([]);
+    const [gPlaylist, setGPlaylist] = useState([]);
     const [gCurrentSong, setGCurrentSong] = useState(null)
     const [gIsPlaying, setGIsPlaying] = useState(false)
 
@@ -89,7 +91,7 @@ function Home() {
                     <Cover />
 
                     {text && songsData && <Results tag={'Canciones'} />}
-                    <Songs songsData={songsData} setGPlayList={setGPlayList} setGCurrentSong={setGCurrentSong} setGIsPlaying={setGIsPlaying} />
+                    <Songs songsData={songsData} setGPlaylist={setGPlaylist} setGCurrentSong={setGCurrentSong} setGIsPlaying={setGIsPlaying} />
 
                     {text && albumsData && <Results tag={'Albumes'} />}
                     {/* <Albums albumsData={albumsData} /> */}
@@ -97,7 +99,7 @@ function Home() {
             </div>
 
             <footer className={styles.footer}>
-                <Player newPlayList={gPlayList} play={gIsPlaying} newCurrentSong={gCurrentSong} />
+                <Player newPlayList={gPlaylist} play={gIsPlaying} newCurrentSong={gCurrentSong} />
             </footer>
         </div>
     )
@@ -140,7 +142,7 @@ function Playlist() {
     )
 }
 
-function Songs({ songsData, setGPlayList, setGCurrentSong, setGIsPlaying }) {
+function Songs({ songsData, setGPlaylist, setGCurrentSong, setGIsPlaying }) {
 
     const [songIndex, setSongIndex] = useState(null)
 
@@ -165,7 +167,7 @@ function Songs({ songsData, setGPlayList, setGCurrentSong, setGIsPlaying }) {
         console.log('you clicked me again', songIndex)
         setGCurrentSong(songIndex)
         setGIsPlaying(true)
-        setGPlayList(filterSongs(songsData))
+        setGPlaylist(filterSongs(songsData))
     }
 
     console.log('songsData in Songs component is: ')
@@ -184,7 +186,7 @@ function Songs({ songsData, setGPlayList, setGCurrentSong, setGIsPlaying }) {
     )
 }
 
-function Albums({ albumsData, gPlayList, gCurrentSong, gIsPlaying }) {
+function Albums({ albumsData, gPlaylist, gCurrentSong, gIsPlaying }) {
 
     const [albumId, setAlbumId] = useState(0);
 
