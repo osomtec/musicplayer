@@ -168,10 +168,6 @@ function Songs({ songsData, setGPlayList, setGCurrentSong, setGIsPlaying }) {
         setGPlayList(filterSongs(songsData))
     }
 
-    // useEffect(() => {
-    //     handleClick(songId)
-    // }, [songIndex])
-
     console.log('songsData in Songs component is: ')
     console.log(songsData)
 

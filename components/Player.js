@@ -5,11 +5,11 @@ import styles from './Player.module.scss';
 
 const imgPoster = './images/adele21cover.jpg';
 
-function Player({ newPlayList = [], play = false, newCurrentSong = null }) {
+function Player({ newPlaylist = [], play = false, newCurrentSong = null }) {
     const [isMuted, setIsMuted] = useState(false);
     const [isPlaying, setIsPlaying] = useState(play);
     const [currentSong, setCurrentSong] = useState(newCurrentSong)   // the song is repeated on next and previous buttons
-    const [playList] = useState(newPlayList);
+    const [playlist] = useState(newPlaylist);
     const [song, setSong] = useState(undefined)
 
     function handleClickMute() {
@@ -31,11 +31,11 @@ function Player({ newPlayList = [], play = false, newCurrentSong = null }) {
 
     function playSong() {
         if (currentSong >= 0) {
-            song.src = playList[currentSong].preview;
+            song.src = playlist[currentSong].preview;
             song.play();
             setIsPlaying(true);
         }
-        console.log(`currentSong= ${currentSong}  :  Lenght = ${playList.length}  :  isPlaying = ${isPlaying}`);
+        console.log(`currentSong= ${currentSong}  :  Lenght = ${playlist.length}  :  isPlaying = ${isPlaying}`);
     }
 
     function stopSong() {
@@ -56,7 +56,7 @@ function Player({ newPlayList = [], play = false, newCurrentSong = null }) {
     function handleClickNext() {
         stopSong();
         let current = currentSong + 1;
-        if (current === playList.length)
+        if (current === playlist.length)
             current = 0;
         setCurrentSong(current);
         playSong();
@@ -66,7 +66,7 @@ function Player({ newPlayList = [], play = false, newCurrentSong = null }) {
         stopSong();
         let current = currentSong - 1;
         if (current < 0)
-            current = playList.length - 1;
+            current = playlist.length - 1;
         setCurrentSong(current);
         playSong();
     }
@@ -83,23 +83,17 @@ function Player({ newPlayList = [], play = false, newCurrentSong = null }) {
 
     }, [])
 
-    // useEffect(() => {
-
-    //     function addList(sourceUrl) {
-    //         playList.push(sourceUrl);
-    //     }
-
-    //     addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3');
-    //     addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3');
-    //     addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3');
-
-    //     setCurrentSong(0);
-
-    //     setIsPlaying(false);
-
-    //     console.log('updated ?')
-
-    // }, [playList])
+    useEffect(() => {
+        function addList(sourceUrl) {
+            playlist.push(sourceUrl);
+        }
+        addList('https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3');
+        addList('https://www.bensound.com/bensound-music/bensound-dreams.mp3');
+        addList('https://www.bensound.com/bensound-music/bensound-actionable.mp3');
+        setCurrentSong(0);
+        setIsPlaying(false);
+        console.log('updated ?')
+    }, [playlist])
 
     return (
         <>
